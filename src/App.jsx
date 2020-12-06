@@ -74,8 +74,18 @@ const App = (props) => {
       setItemInput("");
     } else {
       // The spec does not specify exactly what should happen for invalid inputs. For my implementation
-      // I will simply log an error and not add the item to the wishList.
+      // I will simply log an error and not add the item to the wishList
       console.log("Invalid Input. Input is either an empty string or is already in the wishList!")
+    };
+  };
+
+  const submit = () => {
+    // Only submit if the wishList is NOT empty
+    if (props.wishList.length !== 0) {
+      alert("Wish list submitted to Santa!");
+    } else {
+      // For my implementation I will simply log an error and not submit if the wishList is empty
+      console.log("Cannot Submit because WishList is empty!")
     };
   };
 
@@ -95,7 +105,7 @@ const App = (props) => {
         </ItemsContainer>
         <ItemInput value={itemInput} onChange={e => setItemInput(e.target.value)}/>
         <Button onClick={addItem}>Add</Button>
-        <Button size="280px">Submit</Button>
+        <Button size="280px" onClick={submit}>Submit</Button>
       </Container>
     </Page>
   );
