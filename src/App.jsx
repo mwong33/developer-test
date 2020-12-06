@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {connect} from 'react-redux';
 import {addItem, deleteItem} from './redux/actions';
 import styled from 'styled-components';
@@ -62,10 +62,15 @@ const Button = styled.button.attrs(props => ({
   font-weight: bold;
 `;
 
-const app = (props) => {
+const App = (props) => {
+  const [itemInput, setItemInput] = useState();
 
   const addItem = () => {
-    console.log("added");
+    // Validate the input
+
+    // Do NOT allow empty strings
+
+    // Do NOT allow duplicate items
   };
 
   return (
@@ -103,4 +108,4 @@ const mapDispatchToProps = () => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(app);
+export default connect(mapStateToProps, mapDispatchToProps())(App);
