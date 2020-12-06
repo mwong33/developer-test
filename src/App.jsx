@@ -63,19 +63,27 @@ const Button = styled.button.attrs(props => ({
 `;
 
 const app = (props) => {
+
+  const addItem = () => {
+    console.log("added");
+  };
+
   return (
     <Page>
       <Container>
         <h1>MY WISHLIST</h1>
         <ItemsContainer>
           {
-            props.wishList.map((item) => {
-            return <p>{item}</p>
+            props.wishList.map((item, index) => {
+            return <p 
+            key={index} 
+            onClick={() => props.deleteItem(item)} 
+            style={{"cursor": "pointer"}}>{item}</p>
             })
           }
         </ItemsContainer>
         <ItemInput/>
-        <Button>Add</Button>
+        <Button onClick={addItem}>Add</Button>
         <Button size="280px">Submit</Button>
       </Container>
     </Page>
