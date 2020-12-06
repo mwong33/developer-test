@@ -63,14 +63,20 @@ const Button = styled.button.attrs(props => ({
 `;
 
 const App = (props) => {
-  const [itemInput, setItemInput] = useState();
+  const [itemInput, setItemInput] = useState("");
 
   const addItem = () => {
-    // Validate the input
-
-    // Do NOT allow empty strings
-
-    // Do NOT allow duplicate items
+    // Validate the input, no empty strings, no duplicates
+    if (itemInput !== "" && !props.wishList.includes(itemInput)) {
+      // Add the item to the wishList 
+      props.addItem(itemInput);
+      // Clear the input
+      setItemInput("");
+    } else {
+      // The spec does not specify exactly what should happen for invalid inputs. For my implementation
+      // I will simply log an error and not add the item to the wishList.
+      console.log("Invalid Input. Input is either an empty string or is already in the wishList!")
+    };
   };
 
   return (
@@ -87,7 +93,7 @@ const App = (props) => {
             })
           }
         </ItemsContainer>
-        <ItemInput/>
+        <ItemInput value={itemInput} onChange={e => setItemInput(e.target.value)}/>
         <Button onClick={addItem}>Add</Button>
         <Button size="280px">Submit</Button>
       </Container>
