@@ -68,6 +68,11 @@ const app = (props) => {
       <Container>
         <h1>MY WISHLIST</h1>
         <ItemsContainer>
+          {
+            props.wishList.map((item) => {
+            return <p>{item}</p>
+            })
+          }
         </ItemsContainer>
         <ItemInput/>
         <Button>Add</Button>
