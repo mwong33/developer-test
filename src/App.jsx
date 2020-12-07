@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux';
-import {addItem, deleteItem} from './redux/actions';
+import {addItem, deleteItem, clear} from './redux/actions';
 import styled from 'styled-components';
 
 const Page = styled.div`
@@ -65,6 +65,7 @@ const Button = styled.button.attrs(props => ({
 const App = (props) => {
   const [itemInput, setItemInput] = useState("");
 
+  // Function for the 'Add' button. Takes care of adding items to the wishList
   const addItem = () => {
     // Validate the input, no empty strings, no duplicates
     if (itemInput !== "" && !props.wishList.includes(itemInput)) {
@@ -73,16 +74,18 @@ const App = (props) => {
       // Clear the input
       setItemInput("");
     } else {
-      // The spec does not specify exactly what should happen for invalid inputs. For my implementation
-      // I will simply log an error and not add the item to the wishList
+      // The spec does not specify exactly what should happen for invalid inputs. 
+      // For my implementation I will simply log an error and not add the item to the wishList
       console.log("Invalid Input. Input is either an empty string or is already in the wishList!")
     };
   };
 
+  // Function for the 'Submit' button. Takes care of submitting items and then clearing the wishList
   const submit = () => {
     // Only submit if the wishList is NOT empty
     if (props.wishList.length !== 0) {
       alert("Wish list submitted to Santa!");
+      props.clear()
     } else {
       // For my implementation I will simply log an error and not submit if the wishList is empty
       console.log("Cannot Submit because WishList is empty!")
@@ -120,7 +123,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = () => {
   return {
     addItem,
-    deleteItem
+    deleteItem,
+    clear
   };
 };
 
